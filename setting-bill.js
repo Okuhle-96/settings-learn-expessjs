@@ -9,8 +9,8 @@ module.exports = function SettingsBill() {
     function setSettings (settings) {
         smsCost = Number(settings.smsCost);
         callCost = Number(settings.callCost);
-        warningLevel = settings.warningLevel;
-        criticalLevel = settings.criticalLevel;
+        warningLevel = Number(settings.warningLevel);
+        criticalLevel = Number(settings.criticalLevel);
     }
 
     function getSettings() {
@@ -25,10 +25,10 @@ module.exports = function SettingsBill() {
     function recordAction(action) {
 
         let cost = 0;
-        if (action === 'sms' && !hasReachedCriticalLevel){
+        if (action === 'sms' && !hasReachedCriticalLevel()){
             cost = smsCost;
         }
-        else if (action === 'call' && !hasReachedCriticalLevel){
+        else if (action === 'call' && !hasReachedCriticalLevel()){
             cost = callCost;
         }
 
@@ -89,19 +89,18 @@ module.exports = function SettingsBill() {
     }
 
     function totals() {
-        let smsTotal = getTotal('sms')
-        let callTotal = getTotal('call')
+        let smsTotal = getTotal('sms').toFixed(2)
+        let callTotal = getTotal('call').toFixed(2)
         return {
             smsTotal,
             callTotal,
-            grandTotal : grandTotal()
-        }
+            grandTotal : grandTotal().toFixed(2)
+                }
     }
 
     function hasReachedWarningLevel(){
         const total = grandTotal();
-        const reachedWarningLevel = total >= warningLevel 
-            && total < criticalLevel;
+        const reachedWarningLevel = total >= warningLevel && total < criticalLevel;
 
         return reachedWarningLevel;
     }
