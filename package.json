@@ -4,13 +4,13 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "test": "mocha",
-      "start": "node index.js"
+      "test": "mocha"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "mocha": "^5.2.0"
+      "mocha": "^5.2.0",
+      "chai": "4.0.2"
     },
     "dependencies": {
       "body-parser": "^1.19.0",
