@@ -1,5 +1,5 @@
 let assert = require("assert");
-let SettingsBill = require("./express-intro/setting-bill");
+let SettingsBill = require("../setting-bill");
 
 
 describe('Setting Bill Factory Function', function(){
