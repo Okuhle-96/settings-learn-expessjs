@@ -71,21 +71,29 @@ app.post('/action', function(req, res){
 
 app.get('/actions', function(req, res){
 
-    res.render('actions', 
-    {actions: settingBill.actions()
-    })
-
+  
     const actions = settingBill.actions()
 
     actions.forEach(elem => {
     elem.timestamps = moment(elem.timestamp).fromNow()})
 
+    res.render('actions', 
+    {actions: settingBill.actions()
+    })
+
+
 });
 
 app.get('/actions/:type', function(req, res){
 
-    const actionType = req.params.type;
+   
 
+    const actions = settingBill.actions()
+
+    actions.forEach(elem => {
+    elem.timestamps = moment(elem.timestamp).fromNow()})
+    
+    const actionType = req.params.type;
     res.render('actions',  {actions: settingBill.actionsFor(actionType)})
 
 });
