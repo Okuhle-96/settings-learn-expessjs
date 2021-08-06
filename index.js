@@ -75,18 +75,19 @@ app.get('/actions', function(req, res){
     {actions: settingBill.actions()
     })
 
-  
+    const actions = settingBill.actions()
+
+    actions.forEach(elem => {
+    elem.timestamps = moment(elem.timestamp).fromNow()})
 
 });
 
 app.get('/actions/:type', function(req, res){
-  const actions = settingBill.actions()
-
-  actions.forEach(elem => {
-  elem.timestamps = moment(elem.timestamp).fromNow()})
 
     const actionType = req.params.type;
+
     res.render('actions',  {actions: settingBill.actionsFor(actionType)})
+
 });
 
 const PORT = process.env.PORT || 4001;
